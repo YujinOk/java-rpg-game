@@ -10,18 +10,18 @@ public class Flying extends Skill{
         super("Flying",7);
     }
 
-    public void useFlying(Player player, Enemy enemy){
+    public void useFlying(Enemy enemy,Player player){
         System.out.println("");
         if(super.randomGenerator(2)==2){
             System.out.println("");
-            System.out.println(player.name + " successfully hit "+ enemy.name+ " while flying");
-            player.hp+=this.hpValue;
-            enemy.hp-=this.hpValue;
-            System.out.println(enemy.name+ " hp: "+ enemy.hp);
+            System.out.println(enemy.name + " successfully hit "+ player.name+ " while flying ✈️");
+            enemy.hp+=this.hpValue;
+            player.hp-=this.hpValue;
+            System.out.println(player.name+ " got "+ this.hpValue+ " damage");
         }else {
             System.out.println("");
-            System.out.println(player.name + " failed using superpower");
-            player.hp-=this.hpValue;
+            System.out.println(enemy.name + " failed using superpower 😥");
+            enemy.hp-=this.hpValue;
         }
 
     }

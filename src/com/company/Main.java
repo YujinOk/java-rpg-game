@@ -7,23 +7,17 @@ import com.company.Place.Ocean;
 import com.company.Place.SmallMountain;
 import com.company.Place.TallMountain;
 import com.company.Random.RandomMission;
-import com.company.Skill.KoPunch;
-import com.company.Skill.Skill;
-import com.company.Skill.Stomp;
-import com.company.SuperPower.SuperPower;
-
+import com.company.SuperPower.Invisible;
+import com.company.SuperPower.StealHp;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
         boolean game= true;
         Scanner in= new Scanner(System.in);
         Level level= new Level("Ground", 0 , 0, 0);
-
         Player player = new Player(0, level);
         RandomMission randMission= new RandomMission(0, player);
         Rest rest = new Rest(player);
@@ -31,9 +25,7 @@ public class Main {
         GameStart gameStart= new GameStart(player);
         Store store = new Store(player, gameStart);
 
-        SecureRandom rand = new SecureRandom();
-        String []superPowerList={"Flying", "Invisible", "Stealing enemy's hp"};
-        String superPowerName=superPowerList[rand.nextInt(superPowerList.length)];
+
         gameStart.askUserName();
 
         while(game && !player.isDead){
@@ -110,11 +102,12 @@ public class Main {
             }else if(menuChoices==7) {
                 if(player.upgradeTheLevel()){
 
-               Monster monster= new Monster(level);
-
-                    player.seeMyInfo();
+                    Monster monster= new Monster(level);
+                    Invisible invisible= new Invisible();
+                    player.superPower=invisible;
+                    player.seeMyInfo(player.superPower);
                     monster.enemyInfo(monster.skill);
-                    gameStart.attackChoices(monster);
+                    gameStart.attackChoicesWithStrongerEnemy(monster);
                 }
             } else if(menuChoices==8){
 //                  Catch the boss
@@ -124,7 +117,9 @@ public class Main {
                 }else{
                     Boss boss = new Boss(level);
                     boss.enemyInfo(boss.skill);
-                    player.seeMyInfo();
+                    StealHp stealHp= new StealHp();
+                    player.superPower=stealHp;
+                    player.seeMyInfo(player.superPower);
                     gameStart.fightTheBoss(boss);
 
                 }

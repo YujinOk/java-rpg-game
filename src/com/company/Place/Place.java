@@ -1,5 +1,6 @@
 package com.company.Place;
 
+import com.company.Animal;
 import com.company.Character.Player;
 import com.company.Enemy.Enemy;
 import com.company.GameStart;
@@ -12,6 +13,7 @@ public class Place {
 
     GameStart gameStart;
     boolean game=false;
+    Animal animal;
 
     public Place(String name, int difficulty, int danger,  Player player, GameStart gameStart){
         this.name=name;
@@ -42,6 +44,8 @@ public class Place {
         System.out.println( player.name + " got killed by " + this.name+ " \uD83D\uDC80");
         game=false;
     }
+
+
     public int randomGenerator(int max) {
         int result = 0;
         {

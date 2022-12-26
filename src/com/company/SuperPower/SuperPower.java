@@ -1,14 +1,30 @@
 package com.company.SuperPower;
 
+import com.company.Character.Player;
+import com.company.Enemy.Enemy;
+
 public class SuperPower {
-    String superpower;
+    public String name;
     int hpValue;
 
-    public SuperPower(String superpower, int hpValue){
-    this.superpower=superpower;
+    public SuperPower(String name, int hpValue){
+    this.name=name;
     this.hpValue=hpValue;
     }
 
+  public void useSuperPower(Player player, Enemy enemy){
+      System.out.println("");
+      if(this.randomGenerator(2)==2){
+          System.out.println(player.name + " successfully used superpower: "+ this.name);
+          System.out.println(enemy.name+ " got "+ this.hpValue+ " damage");
+          player.hp+=this.hpValue;
+          enemy.hp-=this.hpValue;
+      }else {
+          System.out.println("");
+          System.out.println(player.name + " failed to use superpower 🤕");
+      }
+
+  }
     public int randomGenerator(int max) {
         int result = 0;
         {

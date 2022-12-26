@@ -7,12 +7,13 @@ import com.company.Skill.Skill;
 public class Monster extends Enemy {
     public KoPunch skill;
     public Monster( Level level){
-        super(level, "Monster",25);
+        super(level, "Monster",10);
         this.skill=new KoPunch();
     }
 
     public void attack(Player player){
         this.skill.useKoPunch(this, player);
+        System.out.println("");
         super.attack(player);
     }
 }

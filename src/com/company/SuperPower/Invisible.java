@@ -7,6 +7,7 @@ public class Invisible extends SuperPower{
     public Invisible(){
         super("Invisible", 7);
     }
+
     public void useInvisible(Player player, Enemy enemy){
         System.out.println("");
         if(super.randomGenerator(2)==2){

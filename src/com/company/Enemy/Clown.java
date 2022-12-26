@@ -14,6 +14,7 @@ public class Clown extends Enemy {
 
     public void attack(Player player){
         this.skill.useUpperCut(this, player);
+        System.out.println("");
         super.attack(player);
     }
 }

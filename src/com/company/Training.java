@@ -14,9 +14,9 @@ public class Training {
     public void calculating(){
         System.out.println(" \uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ");
 //        this.player.intelligence+=10;
-        if(this.randomGenerator(3)==3){
+        if(this.randomGenerator(2)==1){
             System.out.println("🙋‍ Answer: 90");
-            this.player.setIntelligence(this.player.intelligence+10);
+            this.player.setIntelligence(this.player.intelligence+20);
             System.out.println("Congrats! 🎉 you smartie! \u200D  you just earned "+ this.player.intelligence + " Intelligence");
         }else{
             System.out.println("Answer: "+ this.randomGenerator(5));
@@ -27,7 +27,7 @@ public class Training {
     public void programming(){
         System.out.println(" \uD83D\uDC49 Mission: make one variable within 10 sec!  👈");
 
-        if(this.randomGenerator(3)==3){
+        if(this.randomGenerator(2)==1){
             System.out.println("🙋‍ ️Answer: boolean amIawesome = true");
             this.player.setIntelligence(this.player.intelligence+ 20);
             System.out.println("Congrats! 🎉 you Smartie! \u200D you just earned "+ this.player.intelligence + " Intelligence");
@@ -39,7 +39,7 @@ public class Training {
 
     public void twerking(){
         System.out.println(" \uD83D\uDC49  Mission: Twerking for 10 sec!  👈 ");
-        if(this.randomGenerator(3)==3){
+        if(this.randomGenerator(2)==1){
             this.player.setPhysicalPower(this.player.physicalPower+30);
             System.out.println("Hell yah! 🎉 you got the Kim kardashian ASS \uD83D\uDD25");
             System.out.println("You just earned "+ this.player.physicalPower + " Physical power");
@@ -50,7 +50,7 @@ public class Training {
 
     public void burpees(){
         System.out.println(" \uD83D\uDC49 Mission: Non stop Burpees for 1 min!  👈 ");
-        if(this.randomGenerator(3)==3){
+        if(this.randomGenerator(2)==1){
             this.player.setPhysicalPower(this.player.physicalPower+30);
             System.out.println("Amazing!!! 🎉");
             System.out.println("You just earned "+ this.player.physicalPower + " Physical power");

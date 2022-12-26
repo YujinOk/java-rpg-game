@@ -2,6 +2,7 @@ package com.company.Character;
 import com.company.Enemy.Enemy;
 import com.company.Item.Item;
 import com.company.Level;
+import com.company.SuperPower.Invisible;
 import com.company.SuperPower.SuperPower;
 import com.company.Item.Inventory;
 import java.util.Scanner;
@@ -14,19 +15,18 @@ public class Player extends Character {
     int itemWornIndex;
     boolean isEquipped=false;
     public String equippedItemName;
-    SuperPower superPower;
     public boolean hasWon=false;
     public boolean gotPrincess=false;
-
- public Inventory storageList;
+    public Inventory storageList;
     Scanner in= new Scanner(System.in);
-
+    public SuperPower superPower;
 
     public Player(int itemWornIndex, Level level) {
         super("", 20, 0, 0, 100, 10,level);
         this.itemWornIndex = itemWornIndex;
-//        this.superPower= new SuperPower()
         this.storageList= new Inventory(this);
+
+
     }
 
     public void setItemWorn(int itemWornIndex){
@@ -53,10 +53,10 @@ public class Player extends Character {
         this.physicalPower=physicalPower;
     }
 
-    public void seeMyInfo(){
+    public void seeMyInfo(SuperPower superPower){
         System.out.println("");
         System.out.println("My name is "+ this.name);
-        System.out.println("My super power: "+ this.superPower);
+        System.out.println("My super power: "+ superPower.name);
         System.out.println("My health point: "+ this.hp);
         System.out.println("");
     }
@@ -128,6 +128,7 @@ public class Player extends Character {
                 System.out.println("You are one step closer to rescue the princess! \uD83D\uDC51");
                 System.out.println("You are going to have to kill the enemy who is stronger than others you fought before");
                 System.out.println("Good luck! \uD83C\uDF89");
+                this.level.name="Gold";
                 return true;
             }else{
                 int neededIntelligence=20-this.intelligence;
@@ -139,16 +140,12 @@ public class Player extends Character {
                 System.out.println("");
                 if(neededExp>0 && neededExp<=3){
                     System.out.println("Needed Exp 🤺: "+ neededExp);
-//                    System.out.println("now exp: "+ this.exp);
                 }
-                if(neededIntelligence>0 && neededIntelligence<=50){
+                if(neededIntelligence>0 && neededIntelligence<=20){
                     System.out.println("Needed Intelligence \uD83D\uDCDA: "+ neededIntelligence);
-//                    System.out.println("now intelligence: "+ this.intelligence);
-
                 }
-                if(neededPhysicalPower>0 && neededPhysicalPower<=50){
+                if(neededPhysicalPower>0 && neededPhysicalPower<=20){
                     System.out.println("Needed Physical Power 💪: "+ neededPhysicalPower  );
-//                    System.out.println("now physical power: "+ this.physicalPower);
                 }
                 return false;
             }

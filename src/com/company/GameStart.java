@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class GameStart {
     boolean game=true;
     Player player;
-//    AdvancedPlayer advancedPlayer;
     Scanner in= new Scanner(System.in);
     Level level= new Level("Ground", 0, 0, 0);
 
@@ -23,9 +22,6 @@ public class GameStart {
 
     public void askUserName(){
         System.out.println("Hiya! what's your name?");
-
-
-
         String userName = in.nextLine();
         System.out.println("Welcome to the game " + userName+ " 🤗");
         System.out.println("");
@@ -92,9 +88,9 @@ public class GameStart {
         }
     }
 
-    public void attackChoicesWithStrongerEnemy(Enemy advancedEnemy){
+    public void attackChoicesWithStrongerEnemy(Enemy enemy){
         while(game && !this.player.isDead){
-            if(this.player.hp> 0 && advancedEnemy.hp>0){
+            if(this.player.hp> 0 && enemy.hp>0){
                 System.out.println("");
                 System.out.println("1. Attack");
                 System.out.println("2. Skills");
@@ -103,27 +99,30 @@ public class GameStart {
 
                 int attackChoice=in.nextInt();
                 if(attackChoice==1){
-                    this.player.attack(advancedEnemy);
+                    this.player.attack(enemy);
 
-                    if (advancedEnemy.hp > 0) {
-                        advancedEnemy.attack(player);
+                    if (enemy.hp > 0) {
+                        enemy.attack(player);
                     }
                 }else if(attackChoice==2){
-//                    this.player.showSuperPower(advancedEnemy);
+                    this.player.superPower.useSuperPower(player,enemy);
                 }else if(attackChoice==3){
                     this.player.defense();
                 }else{
                     break;
                 }
-            }else if(advancedEnemy.hp<=0 &&this.player.hp>0){
-                advancedEnemy.isDead=true;
-
+            }else if(enemy.hp<=0 &&this.player.hp>0){
+                enemy.isDead=true;
+                enemy.setHp(0);
+                System.out.println("==========================================");
+                System.out.println(player.name+ " HP: "+ player.hp);
+                System.out.println(enemy.name+ " HP: "+ enemy.hp);
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
                 this.player.hasWon=true;
                 System.out.println("");
-                System.out.println("\uD83C\uDF8A " + this.player.name+ " killed "+ advancedEnemy.name+ " \uD83C\uDF8A ");
+                System.out.println("\uD83C\uDF8A " + this.player.name+ " killed "+ enemy.name+ " \uD83C\uDF8A ");
                 System.out.println("👊 Now, you can go to catch the boss! 👊");
                 System.out.println("Exp: "+ this.player.exp);
                 System.out.println("Money: $ "+ this.player.money);
@@ -132,7 +131,7 @@ public class GameStart {
 
                 break;
             }else{
-                System.out.println("💀 "+ advancedEnemy.name+ " killed "+ this.player.name + " 💀");
+                System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;
                 game=false;
             }
@@ -156,7 +155,7 @@ public class GameStart {
                         boss.attack(player);
                     }
                 }else if(attackChoice==2){
-//                    this.player.showSuperPower(boss);
+                    this.player.superPower.useSuperPower(player,boss);
                 }else if(attackChoice==3){
                     this.player.defense();
                 }else{
@@ -164,7 +163,10 @@ public class GameStart {
                 }
             }else if(boss.hp<=0 &&this.player.hp>0){
                 boss.isDead=true;
-
+                boss.setHp(0);
+                System.out.println("==========================================");
+                System.out.println(player.name+ " HP: "+ player.hp);
+                System.out.println(boss.name+ " HP: "+ boss.hp);
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
@@ -181,6 +183,7 @@ public class GameStart {
                 System.out.println(this.player.name+ " ran away 🤣 🤣 🤣 🤣 🤣");
                 System.out.println("############################ THE END #################################################");
                 game=false;
+                this.player.isDead=true;
             }else{
                 System.out.println("💀 "+ boss.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;

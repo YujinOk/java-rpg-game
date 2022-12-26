@@ -1,5 +1,6 @@
 package com.company.Place;
 
+import com.company.Animal;
 import com.company.Character.Player;
 import com.company.GameStart;
 
@@ -20,7 +21,7 @@ public class Ocean extends Place{
         System.out.println("Are you ready??? \uD83E\uDD29");
         System.out.println("");
 
-//        Fish fish = new Fish(player);
-//        fish.eatOrEaten();
+        Animal fish= new Animal(new String[]{"Shark", "Dolphin"},player,false);
+        fish.fishing(player);
     }
 }
