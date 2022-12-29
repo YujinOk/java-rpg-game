@@ -22,7 +22,7 @@ public class Player extends Character {
     public SuperPower superPower;
 
     public Player(int itemWornIndex, Level level) {
-        super("", 20, 0, 0, 100, 10,level);
+        super("", 20, 0, 0, 0, 10,level);
         this.itemWornIndex = itemWornIndex;
         this.storageList= new Inventory(this);
 

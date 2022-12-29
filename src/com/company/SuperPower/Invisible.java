@@ -12,7 +12,7 @@ public class Invisible extends SuperPower{
         System.out.println("");
         if(super.randomGenerator(2)==2){
             System.out.println("");
-            System.out.println(player.name + " made himself invisible");
+            System.out.println(player.name + " made himself invisible 😎");
             System.out.println(enemy.name+ " can't find "+ player.name);
             System.out.println(player.name + " beat the shit out of "+ enemy.name + " 🔥");
             player.hp+=this.hpValue;
@@ -22,7 +22,7 @@ public class Invisible extends SuperPower{
             System.out.println("");
             System.out.println(player.name + " couldn't fully make himself invisible timely");
             System.out.println("Due to poor timing, "+player.name+ " got hit by "+ enemy.name+ " 🤕");
-            player.hp-=this.hpValue;
+//            player.hp-=this.hpValue;
         }
 
     }

@@ -114,9 +114,8 @@ public class GameStart {
             }else if(enemy.hp<=0 &&this.player.hp>0){
                 enemy.isDead=true;
                 enemy.setHp(0);
-                System.out.println("==========================================");
-                System.out.println(player.name+ " HP: "+ player.hp);
-                System.out.println(enemy.name+ " HP: "+ enemy.hp);
+                System.out.println("");
+
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
@@ -164,9 +163,7 @@ public class GameStart {
             }else if(boss.hp<=0 &&this.player.hp>0){
                 boss.isDead=true;
                 boss.setHp(0);
-                System.out.println("==========================================");
-                System.out.println(player.name+ " HP: "+ player.hp);
-                System.out.println(boss.name+ " HP: "+ boss.hp);
+                System.out.println("");
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;

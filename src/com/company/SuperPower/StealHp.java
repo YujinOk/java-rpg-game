@@ -19,8 +19,8 @@ public class StealHp extends SuperPower{
         }else{
             System.out.println("");
             System.out.println("Ops, awkward! You failed to steal "+ enemy.name+ " hp 😪");
-            player.hp-=this.hpValue;
-            System.out.println(enemy.name+ " hp: "+ enemy.hp);
+//            player.hp-=this.hpValue;
+//            System.out.println(enemy.name+ " hp: "+ enemy.hp);
         }
     }
 }

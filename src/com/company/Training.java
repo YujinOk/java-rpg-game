@@ -1,18 +1,23 @@
 package com.company;
 
 import com.company.Character.Player;
+import com.company.Train.Calculating;
 
 import java.util.Scanner;
 
-public class Training {
+public class Training extends Thread{
     Player player;
 
+//    question needs to be printed with sleep (1 ms?)-> then answer printed
+//    -> then the results either fail or success
     public Training(Player player){
         this.player=player;
     }
+
     Scanner in= new Scanner(System.in);
     public void calculating(){
-        System.out.println(" \uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ");
+        String calQuestion="\uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ";
+        System.out.println(calQuestion);
 //        this.player.intelligence+=10;
         if(this.randomGenerator(2)==1){
             System.out.println("🙋‍ Answer: 90");
@@ -70,7 +75,9 @@ public class Training {
 
 
         if(trainingChoices==1){
-            this.calculating();
+//            this.calculating();
+            Calculating calculating= new Calculating();
+            calculating.start();
         }else if(trainingChoices==2){
             this.programming();
         }else if(trainingChoices==3){
