@@ -76,8 +76,11 @@ public class Training extends Thread{
 
         if(trainingChoices==1){
 //            this.calculating();
-            Calculating calculating= new Calculating();
-            calculating.start();
+            Calculating calculating= new Calculating(player);
+            new Thread (()->{
+                calculating.getTheAnswer();
+            }).start();
+
         }else if(trainingChoices==2){
             this.programming();
         }else if(trainingChoices==3){

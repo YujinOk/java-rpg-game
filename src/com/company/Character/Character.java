@@ -1,6 +1,7 @@
 package com.company.Character;
 
 import com.company.Level;
+import com.company.RandomGenerator;
 import com.company.Skill.Skill;
 
 public class Character {
@@ -77,7 +78,7 @@ public class Character {
 //            Ocean ocean = new Ocean();
 //            ocean.setGame(false);
         }else{
-            opponent.hp-=this.randomGenerator(3);
+            opponent.hp-=RandomGenerator.randomGenerator(3);
             System.out.println(this.name + " HP: "+ this.hp);
             System.out.println(opponent.name + " HP: " + opponent.hp);
             System.out.println("--------------------------------------------");
@@ -97,7 +98,7 @@ public class Character {
     public int defense() {
         System.out.println("========================================");
 //        System.out.println(this.name + " Defense!");
-        int randomHp = this.randomGenerator(4);
+        int randomHp = RandomGenerator.randomGenerator(4);
 //        if(this.defenseRate>0){
 //            this.hp+=randomHp;
 //            System.out.println(this.name + " recovered!");
@@ -119,19 +120,6 @@ public class Character {
 
 
 
-    public int randomGenerator(int max) {
-        int result = 0;
-        {
-            int min = 1;
-            int range = max - min + 1;
-            // generate random numbers within 1 to 3
-            for (int i = 0; i < 3; i++) {
-                int rand = (int) (Math.random() * range) + min;
-                result = rand;
-            }
 
-        }
-        return result;
-    }
 
 }

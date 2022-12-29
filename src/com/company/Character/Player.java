@@ -2,6 +2,7 @@ package com.company.Character;
 import com.company.Enemy.Enemy;
 import com.company.Item.Item;
 import com.company.Level;
+import com.company.RandomGenerator;
 import com.company.SuperPower.Invisible;
 import com.company.SuperPower.SuperPower;
 import com.company.Item.Inventory;
@@ -66,9 +67,9 @@ public class Player extends Character {
         System.out.println("==========================================");
 
         if(this.attackPower>0 && this.attackPower> enemy.attackPower){
-            enemy.hp-=this.randomGenerator(3);
+            enemy.hp-=RandomGenerator.randomGenerator(3);
         }else {
-            enemy.hp-=this.randomGenerator(2);
+            enemy.hp-=RandomGenerator.randomGenerator(2);
         }
         if(this.energyFromFood==0 && this.energyFromRest==0){
             System.out.println("🪫 Your energy running low, it's going to consume your health point 🪫");
@@ -156,7 +157,7 @@ public class Player extends Character {
 
     public void attackWithAttackPower(Character opponent) {
         if (this.attackPower > opponent.attackPower) {
-            int randHp = this.randomGenerator(5);
+            int randHp = RandomGenerator.randomGenerator(5);
             opponent.hp -= randHp;
             opponent.damageTaken += randHp;
             System.out.println("==========================================");
@@ -164,13 +165,13 @@ public class Player extends Character {
             System.out.println(opponent.name + " Damage Taken: " + opponent.damageTaken);
 
         } else if (opponent.attackPower > this.attackPower) {
-            int randHp = this.randomGenerator(5);
+            int randHp = RandomGenerator.randomGenerator(5);
             this.hp -= randHp;
             this.damageTaken += randHp;
             System.out.println(opponent.name + " Attack Power: " + opponent.attackPower);
             System.out.println(this.name + " Damage Taken: " + this.damageTaken);
         } else {
-            int randHp = this.randomGenerator(3);
+            int randHp = RandomGenerator.randomGenerator(3);
             opponent.hp -= randHp;
             opponent.setHp(opponent.hp -= randHp);
             opponent.damageTaken += randHp;

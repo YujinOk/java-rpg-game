@@ -5,6 +5,7 @@ import com.company.Character.Player;
 import com.company.GameStart;
 import com.company.Item.Inventory;
 import com.company.Random.RandomTreasure;
+import com.company.RandomGenerator;
 
 import java.security.SecureRandom;
 
@@ -22,15 +23,15 @@ public class TallMountain extends Mountain{
         System.out.println(player.name+ " is climbing the mountain");
         System.out.println("");
         RandomTreasure randomTreasure = new RandomTreasure("Chocolate",0, 5, this.player);
-        if(this.randomGenerator(5)==2){
+        if(RandomGenerator.randomGenerator(5)==2){
 //            random treasure
             randomTreasure.increaseEnergyByFood();
-        }else if(this.randomGenerator(5)==3){
+        }else if(RandomGenerator.randomGenerator(5)==3){
             randomTreasure.name="Cow poo";
             randomTreasure.hpValue=7;
             randomTreasure.energyValue=0;
             randomTreasure.decreaseHp();
-        }else if(this.randomGenerator(5)==1){
+        }else if(RandomGenerator.randomGenerator(5)==1){
             randomTreasure.name="Shoulder massage";
             randomTreasure.hpValue=7;
             randomTreasure.energyValue=0;

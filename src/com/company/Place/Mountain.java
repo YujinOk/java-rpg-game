@@ -2,6 +2,7 @@ package com.company.Place;
 
 import com.company.Character.Player;
 import com.company.GameStart;
+import com.company.RandomGenerator;
 
 public class Mountain extends Place{
     boolean hasSnow=false;
@@ -28,9 +29,9 @@ public class Mountain extends Place{
     }
 
     public void friendsOrBeKilled(){
-        if(this.randomGenerator(5)==1){
+        if(RandomGenerator.randomGenerator(5)==1){
             this.running();
-        }else if(this.randomGenerator(5)==2){
+        }else if(RandomGenerator.randomGenerator(5)==2){
             this.slappingWithTail();
         } else {
             this.becomingFriends();
@@ -39,14 +40,14 @@ public class Mountain extends Place{
 
     public void running(){
         System.out.println(this.name + "is running towards "+ player.name + " super fast!!!");
-        if(this.randomGenerator(5)==2){
+        if(RandomGenerator.randomGenerator(5)==2){
             this.killedPlayer();
         }
     }
 
     public void slappingWithTail(){
         System.out.println(this.name + " has slapped the fuck out of "+ player.name + " with its tail");
-        if(this.randomGenerator(5)==2){
+        if(RandomGenerator.randomGenerator(5)==2){
             this.killedPlayer();
         }
     }

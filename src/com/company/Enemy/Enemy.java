@@ -3,6 +3,7 @@ package com.company.Enemy;
 import com.company.Character.Character;
 import com.company.Character.Player;
 import com.company.Level;
+import com.company.RandomGenerator;
 import com.company.Skill.Skill;
 
 public class Enemy extends Character {
@@ -25,10 +26,10 @@ public class Enemy extends Character {
         System.out.println("==========================================");
 
         if(player.defenseRate>0){
-            player.hp-=this.randomGenerator(1);
+            player.hp-= RandomGenerator.randomGenerator(1);
         }
         else{
-            player.hp-=this.randomGenerator(2);
+            player.hp-=RandomGenerator.randomGenerator(2);
         }
         System.out.println(this.name + " HP: "+ this.hp);
         System.out.println(player.name + " HP: " + player.hp);
