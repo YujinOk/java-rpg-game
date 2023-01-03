@@ -64,18 +64,18 @@ public class Player extends Character {
 
 @Override
     public void run() {
-
     game=true;
     while(game){
         try{
-            this.attack();
-            Thread.sleep(2000);
             if(this.hp<=0 || this.enemy.hp<=0){
                 game=false;
                 break;
             }
+            this.attack();
+            Thread.sleep(1000);
+
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("KEKEKEK");
         }
     }
       }
@@ -94,10 +94,10 @@ public class Player extends Character {
         }else {
             this.enemy.hp-=RandomGenerator.randomGenerator(2);
         }
-        if(this.energyFromFood==0 && this.energyFromRest==0){
-            System.out.println("🪫 Your energy running low, it's going to consume your health point 🪫");
-            this.hp--;
-        }
+//        if(this.energyFromFood==0 && this.energyFromRest==0){
+//            System.out.println("🪫 Your energy running low, it's going to consume your health point 🪫");
+//            this.hp--;
+//        }
         if(this.enemy.hp<=0){
             this.enemy.setHp(0);
         }

@@ -30,14 +30,15 @@ public class Enemy extends Character {
         game=true;
         while(game){
             try{
-                this.attack();
-                Thread.sleep(2000);
                 if(this.hp<=0 || this.player.hp<=0){
                     game=false;
                     break;
                 }
+                this.attack();
+                Thread.sleep(1000);
+
             }catch (Exception e){
-                System.out.println(e);
+                System.out.println("HAHAHAH");
             }
         }
     }

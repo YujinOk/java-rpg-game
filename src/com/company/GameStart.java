@@ -43,14 +43,20 @@ public class GameStart extends Thread{
     public void attackChoices(Enemy enemy) throws InterruptedException {
 //        FightTime fightTime = new FightTime();
 //        fightTime.start();
-                    enemy.start();
+
                 this.player.start();
+                this.player.setPriority(Thread.MAX_PRIORITY);
+                enemy.start();
+
         boolean game=true;
-        while( game){
+        int counter=0;
+        while( game ){
+            counter++;
+            System.out.println(counter);
+            Thread.sleep(2000);
             if(enemy.hp<=0 &&this.player.hp>0 ){
                 enemy.isDead=true;
-                enemy.join();
-                this.player.join();
+
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
@@ -63,12 +69,14 @@ public class GameStart extends Thread{
                 System.out.println("Please don't forget to do training and rest to recharge your energy ‼️");
                 this.player.energyFromRest-=5;
                 this.player.energyFromFood-=5;
+                enemy.interrupt();
+                this.player.interrupt();
                 break;
             }else if(enemy.hp>0 && this.player.hp<=0){
                 System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;
-                enemy.join();
-                this.player.join();
+                enemy.interrupt();
+                this.player.interrupt();
                 game=false;
             }
 
