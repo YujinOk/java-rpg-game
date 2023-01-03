@@ -1,11 +1,12 @@
 package com.company.Character;
+
 import com.company.Enemy.Enemy;
+import com.company.Item.Inventory;
 import com.company.Item.Item;
 import com.company.Level;
 import com.company.RandomGenerator;
-import com.company.SuperPower.Invisible;
 import com.company.SuperPower.SuperPower;
-import com.company.Item.Inventory;
+
 import java.util.Scanner;
 
 public class Player extends Character {
@@ -21,13 +22,12 @@ public class Player extends Character {
     public Inventory storageList;
     Scanner in= new Scanner(System.in);
     public SuperPower superPower;
+    public Enemy enemy;
 
     public Player(int itemWornIndex, Level level) {
         super("", 20, 0, 0, 0, 10,level);
         this.itemWornIndex = itemWornIndex;
         this.storageList= new Inventory(this);
-
-
     }
 
     public void setItemWorn(int itemWornIndex){
@@ -61,22 +61,45 @@ public class Player extends Character {
         System.out.println("My health point: "+ this.hp);
         System.out.println("");
     }
-    public void attack(Enemy enemy){
+
+@Override
+    public void run() {
+
+    game=true;
+    while(game){
+        try{
+            this.attack();
+            Thread.sleep(2000);
+            if(this.hp<=0 || this.enemy.hp<=0){
+                game=false;
+                break;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+      }
+
+
+
+
+    public void attack(){
         System.out.println("");
         System.out.println("         " + this.name + " Attack!");
         System.out.println("==========================================");
 
-        if(this.attackPower>0 && this.attackPower> enemy.attackPower){
-            enemy.hp-=RandomGenerator.randomGenerator(3);
+        if(this.attackPower>0 && this.attackPower> this.enemy.attackPower){
+            System.out.println(this.name+ " is using attack power 🤺");
+            this.enemy.hp-=RandomGenerator.randomGenerator(3);
         }else {
-            enemy.hp-=RandomGenerator.randomGenerator(2);
+            this.enemy.hp-=RandomGenerator.randomGenerator(2);
         }
         if(this.energyFromFood==0 && this.energyFromRest==0){
             System.out.println("🪫 Your energy running low, it's going to consume your health point 🪫");
             this.hp--;
         }
-        if(enemy.hp<=0){
-            enemy.setHp(0);
+        if(this.enemy.hp<=0){
+            this.enemy.setHp(0);
         }
 
         System.out.println(this.name + " HP: "+ this.hp);
@@ -241,8 +264,6 @@ public class Player extends Character {
             System.out.println("🙅‍♀️You cannot wear two items at the same time! please remove one item and try another!");
         }
     }
-
-
 
 
 }

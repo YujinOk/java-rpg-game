@@ -24,7 +24,7 @@ public class Place {
 
     }
 
-    public void enemyAppearance(Enemy opponent){
+    public void enemyAppearance(Enemy opponent) throws InterruptedException {
         System.out.println("----------------------------------------------------------------------");
 
         if(this.difficulty>0){

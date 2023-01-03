@@ -1,19 +1,19 @@
 package com.company.Enemy;
+
 import com.company.Character.Player;
 import com.company.Level;
 import com.company.Skill.RoundHouseKick;
-import com.company.Skill.Skill;
 
 public class Skeleton extends Enemy {
  RoundHouseKick skill;
-    public Skeleton( Level level){
-        super(level, "Skeleton", 10);
+    public Skeleton( Level level, Player player){
+        super(level, "Skeleton", 10, player);
         this.skill=new RoundHouseKick();
     }
 
     public void attack(Player player){
         this.skill.useRoundHouseKick(this, player);
         System.out.println("");
-        super.attack(player);
+        super.attack();
     }
 }

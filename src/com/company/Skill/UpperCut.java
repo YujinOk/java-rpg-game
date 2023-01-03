@@ -13,7 +13,7 @@ public class UpperCut extends Skill{
         if(super.randomGenerator(3)==1){
             System.out.println("");
             System.out.println("===========================================");
-            System.out.println(enemy.name + " successfully did "+ this.skillName);
+            System.out.println(enemy.name + " successfully used "+ this.skillName);
             System.out.println(player.name+ " got "+ this.hpValue+ " damage");
             player.hp-=this.hpValue;
             System.out.println("===========================================");

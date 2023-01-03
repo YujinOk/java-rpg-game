@@ -7,9 +7,11 @@ import com.company.RandomGenerator;
 import com.company.Skill.Skill;
 
 public class Enemy extends Character {
+    Player player;
 
-    public Enemy(Level level, String name, int hp){
+    public Enemy(Level level, String name, int hp, Player player){
         super(name, hp, 0,0,0,0,level);
+        this.player=player;
     }
 
 
@@ -20,18 +22,37 @@ public class Enemy extends Character {
         System.out.println("");
     }
 
-    public void attack(Player player){
+
+
+
+    @Override
+    public void run() {
+        game=true;
+        while(game){
+            try{
+                this.attack();
+                Thread.sleep(2000);
+                if(this.hp<=0 || this.player.hp<=0){
+                    game=false;
+                    break;
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+    public void attack(){
         System.out.println("");
         System.out.println("         " + this.name + " Attack!");
         System.out.println("==========================================");
 
-        if(player.defenseRate>0){
-            player.hp-= RandomGenerator.randomGenerator(1);
+        if(this.player.defenseRate>0){
+            this.player.hp-= RandomGenerator.randomGenerator(1);
         }
         else{
-            player.hp-=RandomGenerator.randomGenerator(2);
+            this.player.hp-=RandomGenerator.randomGenerator(2);
         }
         System.out.println(this.name + " HP: "+ this.hp);
-        System.out.println(player.name + " HP: " + player.hp);
+        System.out.println(this.player.name + " HP: " + this.player.hp);
     }
 }

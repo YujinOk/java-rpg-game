@@ -7,8 +7,8 @@ import com.company.Enemy.Enemy;
 
 import java.util.Scanner;
 
-public class GameStart {
-    boolean game=true;
+public class GameStart extends Thread{
+
     Player player;
     Scanner in= new Scanner(System.in);
     Level level= new Level("Ground", 0, 0, 0);
@@ -40,32 +40,17 @@ public class GameStart {
         }
     }
 
-    public void attackChoices(Enemy enemy){
-        while( game ){
-            if(this.player.hp> 0 && enemy.hp>0){
-                System.out.println("");
-                System.out.println("1. Attack");
-                System.out.println("2. Defense");
-                System.out.println("3. Run away");
-
-                int attackChoice=in.nextInt();
-                if(attackChoice==1){
-                    this.player.attack(enemy);
-
-                    if (enemy.hp > 0) {
-                        enemy.attack(this.player);
-
-                    }
-
-                }else if(attackChoice==2){
-                    this.player.defense();
-                }else{
-//            Run away
-                    return;
-                }
-            }else if(enemy.hp<=0 &&this.player.hp>0){
+    public void attackChoices(Enemy enemy) throws InterruptedException {
+//        FightTime fightTime = new FightTime();
+//        fightTime.start();
+                    enemy.start();
+                this.player.start();
+        boolean game=true;
+        while( game){
+            if(enemy.hp<=0 &&this.player.hp>0 ){
                 enemy.isDead=true;
-
+                enemy.join();
+                this.player.join();
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
@@ -79,9 +64,11 @@ public class GameStart {
                 this.player.energyFromRest-=5;
                 this.player.energyFromFood-=5;
                 break;
-            }else{
+            }else if(enemy.hp>0 && this.player.hp<=0){
                 System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;
+                enemy.join();
+                this.player.join();
                 game=false;
             }
 
@@ -89,6 +76,7 @@ public class GameStart {
     }
 
     public void attackChoicesWithStrongerEnemy(Enemy enemy){
+        boolean game=true;
         while(game && !this.player.isDead){
             if(this.player.hp> 0 && enemy.hp>0){
                 System.out.println("");
@@ -99,10 +87,10 @@ public class GameStart {
 
                 int attackChoice=in.nextInt();
                 if(attackChoice==1){
-                    this.player.attack(enemy);
+                    this.player.attack();
 
                     if (enemy.hp > 0) {
-                        enemy.attack(player);
+                        enemy.attack();
                     }
                 }else if(attackChoice==2){
                     this.player.superPower.useSuperPower(player,enemy);
@@ -139,6 +127,7 @@ public class GameStart {
     }
 
     public void fightTheBoss(Boss boss){
+        boolean game=true;
         while(game && !this.player.isDead){
             if(this.player.hp>0 && boss.hp>0){
                 System.out.println("");
@@ -148,10 +137,10 @@ public class GameStart {
                 System.out.println("4. Run away");
                 int attackChoice=in.nextInt();
                 if(attackChoice==1){
-                    this.player.attack(boss);
+//                    this.player.attack(enemy);
 
                     if (boss.hp > 0) {
-                        boss.attack(player);
+                        boss.attack();
                     }
                 }else if(attackChoice==2){
                     this.player.superPower.useSuperPower(player,boss);

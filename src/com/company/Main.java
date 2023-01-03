@@ -1,34 +1,35 @@
 package com.company;
 
 import com.company.Character.Player;
-import com.company.Enemy.*;
+import com.company.Enemy.Clown;
+import com.company.Enemy.Ghost;
+import com.company.Enemy.Skeleton;
 import com.company.Item.Store;
 import com.company.Place.Ocean;
 import com.company.Place.SmallMountain;
 import com.company.Place.TallMountain;
 import com.company.Random.RandomMission;
-import com.company.SuperPower.Invisible;
-import com.company.SuperPower.StealHp;
-import java.security.SecureRandom;
+import com.company.Train.Training;
+
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-        boolean game= true;
-        Scanner in= new Scanner(System.in);
-        Level level= new Level("Ground", 0 , 0, 0);
+    public static void main(String[] args) throws InterruptedException {
+        boolean game = true;
+        Scanner in = new Scanner(System.in);
+        Level level = new Level("Ground", 0, 0, 0);
         Player player = new Player(0, level);
-        RandomMission randMission= new RandomMission(0, player);
+        RandomMission randMission = new RandomMission(0, player);
         Rest rest = new Rest(player);
         Training training = new Training(player);
-        GameStart gameStart= new GameStart(player);
+        GameStart gameStart = new GameStart(player);
         Store store = new Store(player, gameStart);
 
 
         gameStart.askUserName();
 
-        while(game && !player.isDead){
+        while (game) {
             System.out.println("----------------------------------------------------------------------------------");
             System.out.println("1. Moving");
             System.out.println("2. Training");
@@ -42,95 +43,130 @@ public class Main {
 
             System.out.println("----------------------------------------------------------------------------------");
 
-            int menuChoices=in.nextInt();
-            if(menuChoices==1){
+            int menuChoices = in.nextInt();
+            if (menuChoices == 1) {
                 System.out.println("1. Mountain");
                 System.out.println("2. The ocean");
 
-                int movingChoices=in.nextInt();
-                if(movingChoices==1){
+                int movingChoices = in.nextInt();
+                if (movingChoices == 1) {
                     System.out.println("1. Big mountain");
                     System.out.println("2. Small mountain");
 
-                    int mountainChoices=in.nextInt();
-                    if(mountainChoices==1){
+                    int mountainChoices = in.nextInt();
+                    if (mountainChoices == 1) {
 //                    call big mountain class
-                        TallMountain tallMountain= new TallMountain(10, player, gameStart);
+                        TallMountain tallMountain = new TallMountain(10, player, gameStart);
                         tallMountain.takeSnowDamage();
                         tallMountain.climbing();
-                        if(player.hp>0 && !player.isDead){
-                            Skeleton skeleton = new Skeleton(level);
-                            tallMountain.enemyAppearance(skeleton);
+                        Skeleton skeleton = new Skeleton(level, player);
+                        System.out.println("Right then... " + skeleton.name + " appeared all of a sudden");
+//                            tallMountain.enemyAppearance(skeleton);
+//                                Clown clown = new Clown(level, player);
+                        player.enemy = skeleton;
+                        System.out.println("");
+                        System.out.println("1. Attack");
+                        System.out.println("2. Run away");
+
+                        int attackChoice=in.nextInt();
+                        if(attackChoice==1){
+                            gameStart.attackChoices(player.enemy);
+                        }else{
+                            continue;
                         }
 
-                    }else if(mountainChoices==2){
-//                    call small mountain class
-                        SmallMountain smallMountain= new SmallMountain(player, 0, gameStart);
-                        smallMountain.skateBoarding();
-                        if(player.hp>0 && !player.isDead){
-                            Clown clown = new Clown(level);
-                            smallMountain.enemyAppearance(clown);
+//                            smallMountain.enemyAppearance(clown);
+//                                if(player.hp> 0 && skeleton.hp>0){
+//                        System.out.println("");
+//                        System.out.println("1. Attack");
+//                        System.out.println("2. Run away");
+//
+//                        int attackChoice = in.nextInt();
+//                        if (attackChoice == 1) {
+//
 
-                        }
+//                            player.start();
+//                            skeleton.start();
+//
+//                            Thread.sleep(2000);
+//
+//                            if (fightTime.time == 10) {
+//                                skeleton.interrupt();
+//                            } else {
+//                                player.attack();
+//                            }
+
+//                        } else {
+//                            continue;
+//                        }
+//
                     }
-                }else if(movingChoices==2){
+                    else if (mountainChoices == 2) {
+//                    call small mountain class
+                        SmallMountain smallMountain = new SmallMountain(player, 0, gameStart);
+                        smallMountain.skateBoarding();
+                        Clown clown = new Clown(level, player);
+//                        if (player.hp > 0 && !player.isDead) {
+//                        }
+
+                    }
+
+                } else if (movingChoices == 2) {
 //                call the ocean class
                     Ocean ocean = new Ocean(player, gameStart);
                     ocean.fishingEvent();
-                    if(player.hp>0 && !player.isDead){
-                        Ghost ghost = new Ghost(level);
+                    if (player.hp > 0 && !player.isDead) {
+                        Ghost ghost = new Ghost(level, player);
                         ocean.enemyAppearance(ghost);
                     }
                 }
-            }else if(menuChoices==2){
+
+            }else if (menuChoices == 2) {
                 training.trainingChoices();
-            }else if(menuChoices==3){
+            } else if (menuChoices == 3) {
 //            Store class
                 store.storeChoice();
 
-            }else if(menuChoices==4){
+            } else if (menuChoices == 4) {
 //            Inventory class
                 player.inventoryChoice();
-            }else if(menuChoices==5){
+            } else if (menuChoices == 5) {
 //            Random mission
                 randMission.randomMissionChoices();
 
-            }else if(menuChoices==6){
+            } else if (menuChoices == 6) {
 
                 rest.restChoices();
 
-            }else if(menuChoices==7) {
-                if(player.upgradeTheLevel()){
+            } else if (menuChoices == 7) {
+                if (player.upgradeTheLevel()) {
 
-                    Monster monster= new Monster(level);
-                    Invisible invisible= new Invisible();
-                    player.superPower=invisible;
-                    player.seeMyInfo(player.superPower);
-                    monster.enemyInfo(monster.skill);
-                    gameStart.attackChoicesWithStrongerEnemy(monster);
+//                    Monster monster = new Monster(level, player);
+//                    Invisible invisible = new Invisible();
+//                    player.superPower = invisible;
+//                    player.seeMyInfo(player.superPower);
+//                    monster.enemyInfo(monster.skill);
+//                    gameStart.attackChoicesWithStrongerEnemy(monster);
                 }
-            } else if(menuChoices==8){
+            } else if (menuChoices == 8) {
 //                  Catch the boss
-                if(!player.hasWon){
+                if (!player.hasWon) {
                     System.out.println("⛔️ You are not eligible to catch the boss yet⛔️");
                     System.out.println("Please go back to change your occupation to fight the strongest enemies 🤕");
-                }else{
-                    Boss boss = new Boss(level);
-                    boss.enemyInfo(boss.skill);
-                    StealHp stealHp= new StealHp();
-                    player.superPower=stealHp;
-                    player.seeMyInfo(player.superPower);
-                    gameStart.fightTheBoss(boss);
+                } else {
+//                    Boss boss = new Boss(level, player);
+//                    boss.enemyInfo(boss.skill);
+//                    StealHp stealHp = new StealHp();
+//                    player.superPower = stealHp;
+//                    player.seeMyInfo(player.superPower);
+//                    gameStart.fightTheBoss(boss);
 
                 }
 
-            } else{
+            } else {
                 System.out.println("Sorry to let you go, see you next time! \uD83D\uDC4B");
-                game=false;
+                game = false;
             }
         }
-
     }
-
 }
-

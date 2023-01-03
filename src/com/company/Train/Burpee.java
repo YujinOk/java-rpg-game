@@ -3,23 +3,17 @@ package com.company.Train;
 import com.company.Character.Player;
 import com.company.RandomGenerator;
 
-public class Calculating extends Training{
-    String question;
-    Player player;
-    String answer;
-    String confirmationAnswer;
-//    Music typing = new Music(new File("../Music/Keyboard-Typing.mp3"),true);
-//    private AtomicBoolean running = new AtomicBoolean(false);
-    public Calculating(Player player){
+public class Burpee extends Training{
+
+    public Burpee(Player player){
         super(player);
-        this.question="\uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ";
-        this.player=player;
+        this.question="\uD83D\uDC49 Mission: Non stop Burpees for 1 min!  👈 ";
     }
 
     public void think(){
         System.out.println("Hmm.....Let me think...🤔");
         try{
-        Thread.sleep(90);
+            Thread.sleep(90);
         }catch (Exception e){
             Thread.currentThread().interrupt();
             System.out.println(e);
@@ -32,18 +26,29 @@ public class Calculating extends Training{
         System.out.println(this.question);
         this.think();
         try {
-           this.getTheAnswer();
+            this.getTheAnswer();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return;
     }
 
+//    public void burpees(){
+//        System.out.println();
+//        if(RandomGenerator.randomGenerator(2)==1){
+//            this.player.setPhysicalPower(this.player.physicalPower+30);
+//            System.out.println("Amazing!!! ");
+//            System.out.println("You just earned "+ this.player.physicalPower + " Physical power");
+//        }else{
+//            System.out.println("Dude...you look miserable! Try again!");
+//        }
+//    }
 
     public void getTheAnswer() throws InterruptedException {
 //        this.think();
         if(RandomGenerator.randomGenerator(2)==1){
-            this.answer="Answer: 90";
+            this.answer="Success! 😎";
+
 
 //            typing.start();
             for(int i=0; i<this.answer.length(); i++){
@@ -52,22 +57,21 @@ public class Calculating extends Training{
             }
             System.out.print("\n");
 //            typing.join();
-            this.player.setIntelligence(this.player.intelligence+20);
-            this.confirmationAnswer="Congrats! 🎉 you smartie! \u200D  you just earned "+ this.player.intelligence + " Intelligence";
+            this.player.setPhysicalPower(this.player.physicalPower+20);
+            this.confirmationAnswer="Amazing!!! You just earned "+ this.player.physicalPower + " physical power 🎊";
             System.out.println(this.confirmationAnswer);
 
         }else{
-            this.answer="Answer: " + RandomGenerator.randomGenerator(5);
+            this.answer="Failed ;;" ;
             for(int i=0; i<this.answer.length(); i++){
                 Thread.sleep(90);
                 System.out.print(this.answer.charAt(i));
             }
             System.out.print("\n");
 
-            this.confirmationAnswer="Wrong! FAILED! you loser! \uD83D\uDE29";
+            this.confirmationAnswer="Not sexy enough..failed! \uD83D\uDE29";
             System.out.println(confirmationAnswer);
 
         }
     }
-
 }

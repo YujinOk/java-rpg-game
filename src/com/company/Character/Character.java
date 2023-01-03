@@ -1,10 +1,11 @@
 package com.company.Character;
 
+import com.company.Enemy.Enemy;
 import com.company.Level;
 import com.company.RandomGenerator;
 import com.company.Skill.Skill;
 
-public class Character {
+public class Character extends Thread {
     public String name;
     public int hp;
     public int exp;
@@ -14,7 +15,7 @@ public class Character {
     public int defenseRate;
     public int money;
     public Level level;
-    boolean game=true;
+    public boolean game=true;
     Skill skill;
     public Character(String name, int hp, int exp, int attackPower, int defenseRate, int money, Level level){
         this.name=name;
@@ -44,46 +45,46 @@ public class Character {
     }
 
 
-    public void attack(Character opponent) {
-
-        System.out.println("         " + this.name + " Attack!");
-        System.out.println("==========================================");
-
-//        this.attackWithAttackPower(opponent);
-
-        if(this.isHpZero()){
-            opponent.exp++;
-            opponent.money+=10;
-            System.out.println(opponent.name+ " killed "+ this.name);
-            System.out.println(opponent.name+" Exp: 1 EXP");
-            System.out.println(opponent.name+ " Money: $ "+ opponent.money);
-            this.setIsDead(true);
-            this.setMoney(10);
-            this.setExp(1);
-
-        }else if(opponent.isHpZero()){
-            this.exp++;
-            this.money+=10;
-            System.out.println("hi");
-            System.out.println(this.name+ " killed "+ opponent.name);
-            System.out.println(this.name+ " Exp: "+ this.exp);
-            System.out.println(this.name+ " Money: $ "+ this.money);
-
-//            this.upgradeTheLevel();
-//            if(this.level.name=="Gold"&& opponent.isDead){
-//                Princess princess = new Princess("Fiona (Shrek)", "Ugly", true, "Unknown");
-//                princess.thankYouForSaving();
-//            }
-            opponent.setIsDead(true);
-//            Ocean ocean = new Ocean();
-//            ocean.setGame(false);
-        }else{
-            opponent.hp-=RandomGenerator.randomGenerator(3);
-            System.out.println(this.name + " HP: "+ this.hp);
-            System.out.println(opponent.name + " HP: " + opponent.hp);
-            System.out.println("--------------------------------------------");
-        }
-    }
+//    public void attack(Character opponent) {
+//
+//        System.out.println("         " + this.name + " Attack!");
+//        System.out.println("==========================================");
+//
+////        this.attackWithAttackPower(opponent);
+//
+//        if(this.isHpZero()){
+//            opponent.exp++;
+//            opponent.money+=10;
+//            System.out.println(opponent.name+ " killed "+ this.name);
+//            System.out.println(opponent.name+" Exp: 1 EXP");
+//            System.out.println(opponent.name+ " Money: $ "+ opponent.money);
+//            this.setIsDead(true);
+//            this.setMoney(10);
+//            this.setExp(1);
+//
+//        }else if(opponent.isHpZero()){
+//            this.exp++;
+//            this.money+=10;
+//            System.out.println("hi");
+//            System.out.println(this.name+ " killed "+ opponent.name);
+//            System.out.println(this.name+ " Exp: "+ this.exp);
+//            System.out.println(this.name+ " Money: $ "+ this.money);
+//
+////            this.upgradeTheLevel();
+////            if(this.level.name=="Gold"&& opponent.isDead){
+////                Princess princess = new Princess("Fiona (Shrek)", "Ugly", true, "Unknown");
+////                princess.thankYouForSaving();
+////            }
+//            opponent.setIsDead(true);
+////            Ocean ocean = new Ocean();
+////            ocean.setGame(false);
+//        }else{
+//            opponent.hp-=RandomGenerator.randomGenerator(3);
+//            System.out.println(this.name + " HP: "+ this.hp);
+//            System.out.println(opponent.name + " HP: " + opponent.hp);
+//            System.out.println("--------------------------------------------");
+//        }
+//    }
 
 
     public boolean isHpZero(){
@@ -119,7 +120,11 @@ public class Character {
     }
 
 
+    public void run(Enemy enemy){
 
+    };
 
+    public void run(Player player){
 
+    };
 }

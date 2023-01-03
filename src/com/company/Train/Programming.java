@@ -3,36 +3,18 @@ package com.company.Train;
 import com.company.Character.Player;
 import com.company.RandomGenerator;
 
-public class Calculating extends Training{
-    String question;
-    Player player;
-    String answer;
-    String confirmationAnswer;
-//    Music typing = new Music(new File("../Music/Keyboard-Typing.mp3"),true);
-//    private AtomicBoolean running = new AtomicBoolean(false);
-    public Calculating(Player player){
+public class Programming extends Training{
+
+    public Programming(Player player){
         super(player);
-        this.question="\uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ";
-        this.player=player;
-    }
-
-    public void think(){
-        System.out.println("Hmm.....Let me think...🤔");
-        try{
-        Thread.sleep(90);
-        }catch (Exception e){
-            Thread.currentThread().interrupt();
-            System.out.println(e);
-        }
-
+        this.question="\uD83D\uDC49 Mission: make one variable within 10 sec!  👈";
     }
 
     @Override
     public void run(){
         System.out.println(this.question);
-        this.think();
         try {
-           this.getTheAnswer();
+            this.getTheAnswer();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -43,7 +25,7 @@ public class Calculating extends Training{
     public void getTheAnswer() throws InterruptedException {
 //        this.think();
         if(RandomGenerator.randomGenerator(2)==1){
-            this.answer="Answer: 90";
+            this.answer="Answer: boolean amIdumb = true; ";
 
 //            typing.start();
             for(int i=0; i<this.answer.length(); i++){
@@ -57,7 +39,7 @@ public class Calculating extends Training{
             System.out.println(this.confirmationAnswer);
 
         }else{
-            this.answer="Answer: " + RandomGenerator.randomGenerator(5);
+            this.answer="Answer: boolean amIhandsome = true;";
             for(int i=0; i<this.answer.length(); i++){
                 Thread.sleep(90);
                 System.out.print(this.answer.charAt(i));
@@ -69,5 +51,6 @@ public class Calculating extends Training{
 
         }
     }
+
 
 }
