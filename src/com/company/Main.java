@@ -1,15 +1,17 @@
 package com.company;
 
 import com.company.Character.Player;
-import com.company.Enemy.Clown;
-import com.company.Enemy.Ghost;
-import com.company.Enemy.Skeleton;
+import com.company.Character.Princess;
+import com.company.Enemy.*;
 import com.company.Item.Store;
 import com.company.Place.Ocean;
 import com.company.Place.SmallMountain;
 import com.company.Place.TallMountain;
 import com.company.Random.RandomMission;
+import com.company.SuperPower.Invisible;
+import com.company.SuperPower.StealHp;
 import com.company.Train.Training;
+
 
 import java.util.Scanner;
 
@@ -29,9 +31,9 @@ public class Main {
 
         gameStart.askUserName();
 
-        while (game) {
+        while (game && !player.isDead) {
             System.out.println("----------------------------------------------------------------------------------");
-            System.out.println("1. Moving");
+            System.out.println("1. Hunting");
             System.out.println("2. Training");
             System.out.println("3. Go to a store");
             System.out.println("4. Go to inventory");
@@ -61,53 +63,24 @@ public class Main {
                         tallMountain.climbing();
                         Skeleton skeleton = new Skeleton(level, player);
                         System.out.println("Right then... " + skeleton.name + " appeared all of a sudden");
-//                            tallMountain.enemyAppearance(skeleton);
-//                                Clown clown = new Clown(level, player);
                         player.enemy = skeleton;
                         System.out.println("");
-                        System.out.println("1. Attack");
-                        System.out.println("2. Run away");
 
-                        int attackChoice=in.nextInt();
-                        if(attackChoice==1){
                             gameStart.attackChoices(player.enemy);
-                        }else{
-                            continue;
-                        }
+                            gameStart.join();
 
-//                            smallMountain.enemyAppearance(clown);
-//                                if(player.hp> 0 && skeleton.hp>0){
-//                        System.out.println("");
-//                        System.out.println("1. Attack");
-//                        System.out.println("2. Run away");
-//
-//                        int attackChoice = in.nextInt();
-//                        if (attackChoice == 1) {
-//
-
-//                            player.start();
-//                            skeleton.start();
-//
-//                            Thread.sleep(2000);
-//
-//                            if (fightTime.time == 10) {
-//                                skeleton.interrupt();
-//                            } else {
-//                                player.attack();
-//                            }
-
-//                        } else {
-//                            continue;
-//                        }
-//
                     }
                     else if (mountainChoices == 2) {
 //                    call small mountain class
                         SmallMountain smallMountain = new SmallMountain(player, 0, gameStart);
                         smallMountain.skateBoarding();
                         Clown clown = new Clown(level, player);
-//                        if (player.hp > 0 && !player.isDead) {
-//                        }
+                        System.out.println("Right then... " + clown.name + " appeared all of a sudden");
+//                            tallMountain.enemyAppearance(skeleton);
+//                                Clown clown = new Clown(level, player);
+                        player.enemy = clown;
+                        System.out.println("");
+                        gameStart.attackChoices(player.enemy);
 
                     }
 
@@ -117,7 +90,14 @@ public class Main {
                     ocean.fishingEvent();
                     if (player.hp > 0 && !player.isDead) {
                         Ghost ghost = new Ghost(level, player);
-                        ocean.enemyAppearance(ghost);
+//                        ocean.enemyAppearance(ghost);
+                        System.out.println("Right then... " + ghost.name + " appeared all of a sudden");
+//                            tallMountain.enemyAppearance(skeleton);
+//                                Clown clown = new Clown(level, player);
+                        player.enemy = ghost;
+                        System.out.println("");
+                        gameStart.attackChoices(player.enemy);
+
                     }
                 }
 
@@ -141,12 +121,18 @@ public class Main {
             } else if (menuChoices == 7) {
                 if (player.upgradeTheLevel()) {
 
-//                    Monster monster = new Monster(level, player);
-//                    Invisible invisible = new Invisible();
-//                    player.superPower = invisible;
-//                    player.seeMyInfo(player.superPower);
-//                    monster.enemyInfo(monster.skill);
-//                    gameStart.attackChoicesWithStrongerEnemy(monster);
+                    Monster monster = new Monster(level, player);
+                    Invisible invisible = new Invisible();
+                    player.superPower = invisible;
+                    player.enemy=monster;
+                    player.seeMyInfo(player.superPower);
+                    monster.enemyInfo(monster.skill);
+                    gameStart.attackChoices(player.enemy);
+                    if(monster.isDead){
+                        player.hasWon=true;
+                        System.out.println("");
+                        System.out.println("👊 Now, you can go to catch the boss! 👊");
+                    }
                 }
             } else if (menuChoices == 8) {
 //                  Catch the boss
@@ -154,12 +140,31 @@ public class Main {
                     System.out.println("⛔️ You are not eligible to catch the boss yet⛔️");
                     System.out.println("Please go back to change your occupation to fight the strongest enemies 🤕");
                 } else {
-//                    Boss boss = new Boss(level, player);
-//                    boss.enemyInfo(boss.skill);
-//                    StealHp stealHp = new StealHp();
-//                    player.superPower = stealHp;
-//                    player.seeMyInfo(player.superPower);
-//                    gameStart.fightTheBoss(boss);
+                    Boss boss = new Boss(level, player);
+                    player.enemy=boss;
+                    boss.enemyInfo(boss.skill);
+                    StealHp stealHp = new StealHp();
+                    player.superPower = stealHp;
+                    player.seeMyInfo(player.superPower);
+                    gameStart.attackChoices(player.enemy);
+
+                    if(player.enemy.isDead){
+                        player.hasWon=true;
+                        player.gotPrincess=true;
+                        System.out.println("");
+                        System.out.println("🎉 Congratulations!!! You can meet the princess!!!! 🎊");
+
+                        Princess princess= new Princess("Cinderella", true, true);
+                        princess.princessInfo();
+                        player.princessEncounter();
+                        System.out.println("When "+ princess.name+ " was about to kiss "+ player.name);
+                        System.out.println(player.name+ " ran away 🤣 🤣 🤣 🤣 🤣");
+                        System.out.println("############################ THE END #################################################");
+                        game=false;
+                    }
+
+
+
 
                 }
 

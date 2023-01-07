@@ -35,10 +35,10 @@ public class Enemy extends Character {
                     break;
                 }
                 this.attack();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
 
             }catch (Exception e){
-                System.out.println("HAHAHAH");
+//                System.out.println("You need wait 2 sec to attack again!");
             }
         }
     }
@@ -53,7 +53,7 @@ public class Enemy extends Character {
         else{
             this.player.hp-=RandomGenerator.randomGenerator(2);
         }
-        System.out.println(this.name + " HP: "+ this.hp);
-        System.out.println(this.player.name + " HP: " + this.player.hp);
+//        System.out.println(this.name + " HP: "+ this.hp);
+//        System.out.println(this.player.name + " HP: " + this.player.hp);
     }
 }

@@ -75,7 +75,7 @@ public class Player extends Character {
             Thread.sleep(1000);
 
         }catch (Exception e){
-            System.out.println("KEKEKEK");
+            System.out.println(e);
         }
     }
       }
@@ -102,8 +102,8 @@ public class Player extends Character {
             this.enemy.setHp(0);
         }
 
-        System.out.println(this.name + " HP: "+ this.hp);
-        System.out.println(enemy.name + " HP: " + enemy.hp);
+//        System.out.println(this.name + " HP: "+ this.hp);
+//        System.out.println(enemy.name + " HP: " + enemy.hp);
     }
 
 

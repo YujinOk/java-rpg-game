@@ -12,7 +12,7 @@ public class GameStart extends Thread{
     Player player;
     Scanner in= new Scanner(System.in);
     Level level= new Level("Ground", 0, 0, 0);
-
+  static boolean canAttack=false;
     public GameStart(Player player){
         this.player=player;
 
@@ -41,28 +41,46 @@ public class GameStart extends Thread{
     }
 
     public void attackChoices(Enemy enemy) throws InterruptedException {
-//        FightTime fightTime = new FightTime();
-//        fightTime.start();
-
-                this.player.start();
-                this.player.setPriority(Thread.MAX_PRIORITY);
-                enemy.start();
-
         boolean game=true;
-        int counter=0;
-        while( game ){
-            counter++;
-            System.out.println(counter);
-            Thread.sleep(2000);
-            if(enemy.hp<=0 &&this.player.hp>0 ){
-                enemy.isDead=true;
+        enemy.start();
 
+
+        Thread coolTime= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int timetoWait=1;
+                try{
+
+                    for(int i=1; i<2; i++){
+                        timetoWait++;
+
+                    }
+                    Thread.sleep(1000);
+
+                }catch(Exception e){
+                    return;
+                }
+                if(timetoWait==2){
+                    canAttack=true;
+                }else{
+                    canAttack=false;
+                }
+            }
+        });
+        coolTime.start();
+        while( game ){
+
+            System.out.println("");
+            System.out.println("1. Attack 2. Use superpower 3. Heal 4. Run away");
+            System.out.println("");
+            int battleChoice= in.nextInt();
+            if(enemy.hp<=0 &&this.player.hp>0){
+                enemy.isDead=true;
                 this.player.hp+=10;
                 this.player.exp++;
                 this.player.money+=10;
                 System.out.println("");
                 System.out.println("\uD83C\uDF8A " + this.player.name+ " killed "+ enemy.name+ " \uD83C\uDF8A ");
-
                 System.out.println("Exp: "+ this.player.exp);
                 System.out.println("Money: $ "+ this.player.money);
                 System.out.println("Hp: " + this.player.hp);
@@ -70,21 +88,46 @@ public class GameStart extends Thread{
                 this.player.energyFromRest-=5;
                 this.player.energyFromFood-=5;
                 enemy.interrupt();
-                this.player.interrupt();
                 break;
             }else if(enemy.hp>0 && this.player.hp<=0){
                 System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;
                 enemy.interrupt();
-                this.player.interrupt();
                 game=false;
             }
+            if(battleChoice==1){
+
+
+                if(!canAttack){
+                    System.out.println("You need to wait 2 sec to attack again!");
+                }else{
+                    player.attack();
+                }
+
+            }else if(battleChoice==2){
+//                print "using superpower"
+                if(player.superPower==null){
+                    System.out.println("You don't have any superpower yet");
+                }else{
+                    this.player.superPower.useSuperPower(player,enemy);
+                }
+                coolTime.interrupt();
+            }else if(battleChoice==3){
+                player.defense();
+                coolTime.interrupt();
+            }else{
+                coolTime.interrupt();
+                break;
+            }
+
 
         }
+
     }
 
-    public void attackChoicesWithStrongerEnemy(Enemy enemy){
+    public void attackChoicesWithStrongerEnemy(Enemy enemy) throws InterruptedException {
         boolean game=true;
+        enemy.start();
         while(game && !this.player.isDead){
             if(this.player.hp> 0 && enemy.hp>0){
                 System.out.println("");
@@ -97,9 +140,6 @@ public class GameStart extends Thread{
                 if(attackChoice==1){
                     this.player.attack();
 
-                    if (enemy.hp > 0) {
-                        enemy.attack();
-                    }
                 }else if(attackChoice==2){
                     this.player.superPower.useSuperPower(player,enemy);
                 }else if(attackChoice==3){
@@ -123,10 +163,11 @@ public class GameStart extends Thread{
                 System.out.println("Money: $ "+ this.player.money);
                 System.out.println("Hp: " + this.player.hp);
                 System.out.println("Please don't forget to do training and rest to recharge your energy ‼️");
-
+                enemy.interrupt();
                 break;
             }else{
                 System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
+                enemy.interrupt();
                 this.player.isDead=true;
                 game=false;
             }

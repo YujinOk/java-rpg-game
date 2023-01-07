@@ -1,7 +1,6 @@
 package com.company.Train;
 
 import com.company.Character.Player;
-import com.company.RandomGenerator;
 
 public class Burpee extends Training{
 
@@ -46,7 +45,7 @@ public class Burpee extends Training{
 
     public void getTheAnswer() throws InterruptedException {
 //        this.think();
-        if(RandomGenerator.randomGenerator(2)==1){
+//        if(RandomGenerator.randomGenerator(2)==1){
             this.answer="Success! 😎";
 
 
@@ -61,17 +60,17 @@ public class Burpee extends Training{
             this.confirmationAnswer="Amazing!!! You just earned "+ this.player.physicalPower + " physical power 🎊";
             System.out.println(this.confirmationAnswer);
 
-        }else{
-            this.answer="Failed ;;" ;
-            for(int i=0; i<this.answer.length(); i++){
-                Thread.sleep(90);
-                System.out.print(this.answer.charAt(i));
-            }
-            System.out.print("\n");
-
-            this.confirmationAnswer="Not sexy enough..failed! \uD83D\uDE29";
-            System.out.println(confirmationAnswer);
-
-        }
+//        }else{
+//            this.answer="Failed ;;" ;
+//            for(int i=0; i<this.answer.length(); i++){
+//                Thread.sleep(90);
+//                System.out.print(this.answer.charAt(i));
+//            }
+//            System.out.print("\n");
+//
+//            this.confirmationAnswer="Not sexy enough..failed! \uD83D\uDE29";
+//            System.out.println(confirmationAnswer);
+//
+//        }
     }
 }

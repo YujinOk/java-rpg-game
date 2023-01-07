@@ -1,7 +1,6 @@
 package com.company.Train;
 
 import com.company.Character.Player;
-import com.company.RandomGenerator;
 
 public class Calculating extends Training{
     String question;
@@ -42,7 +41,7 @@ public class Calculating extends Training{
 
     public void getTheAnswer() throws InterruptedException {
 //        this.think();
-        if(RandomGenerator.randomGenerator(2)==1){
+//        if(RandomGenerator.randomGenerator(2)==1){
             this.answer="Answer: 90";
 
 //            typing.start();
@@ -56,18 +55,19 @@ public class Calculating extends Training{
             this.confirmationAnswer="Congrats! 🎉 you smartie! \u200D  you just earned "+ this.player.intelligence + " Intelligence";
             System.out.println(this.confirmationAnswer);
 
-        }else{
-            this.answer="Answer: " + RandomGenerator.randomGenerator(5);
-            for(int i=0; i<this.answer.length(); i++){
-                Thread.sleep(90);
-                System.out.print(this.answer.charAt(i));
-            }
-            System.out.print("\n");
-
-            this.confirmationAnswer="Wrong! FAILED! you loser! \uD83D\uDE29";
-            System.out.println(confirmationAnswer);
-
-        }
+//        }
+//        else{
+//            this.answer="Answer: " + RandomGenerator.randomGenerator(5);
+//            for(int i=0; i<this.answer.length(); i++){
+//                Thread.sleep(90);
+//                System.out.print(this.answer.charAt(i));
+//            }
+//            System.out.print("\n");
+//
+//            this.confirmationAnswer="Wrong! FAILED! you loser! \uD83D\uDE29";
+//            System.out.println(confirmationAnswer);
+//
+//        }
     }
 
 }

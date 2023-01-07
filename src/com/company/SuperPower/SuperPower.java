@@ -23,8 +23,8 @@ public class SuperPower {
           if(enemy.hp<=0){
               enemy.setHp(0);
           }
-          System.out.println(enemy.name+ " Hp: "+ enemy.hp);
-          System.out.println(player.name+ " Hp: "+ player.hp);
+//          System.out.println(enemy.name+ " Hp: "+ enemy.hp);
+//          System.out.println(player.name+ " Hp: "+ player.hp);
       }else {
           System.out.println("");
           System.out.println(player.name + " failed to use superpower 🤕");
