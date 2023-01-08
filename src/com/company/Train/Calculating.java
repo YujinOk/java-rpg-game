@@ -1,6 +1,7 @@
 package com.company.Train;
 
 import com.company.Character.Player;
+import com.company.Music;
 
 public class Calculating extends Training{
     String question;
@@ -11,44 +12,41 @@ public class Calculating extends Training{
 //    private AtomicBoolean running = new AtomicBoolean(false);
     public Calculating(Player player){
         super(player);
+        this.type="intelligence";
         this.question="\uD83D\uDC49 Mission: Write the sum of 58 + 32 within 10 sec! 👈 ";
+        this.answer="Hmm.....Let me think...🤔 \n\n Answer: 90";
+        this.confirmationAnswer="Congrats! 🎉 you smartie! \u200D  you just earned 20 intelligence";
         this.player=player;
     }
 
-    public void think(){
-        System.out.println("Hmm.....Let me think...🤔");
-        try{
-        Thread.sleep(90);
-        }catch (Exception e){
-            Thread.currentThread().interrupt();
-            System.out.println(e);
-        }
 
-    }
-
-    @Override
-    public void run(){
-        System.out.println(this.question);
-        this.think();
-        try {
-           this.getTheAnswer();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return;
-    }
+//    @Override
+//    public void run(){
+//        System.out.println(this.question);
+////        this.think();
+//        try {
+//           this.getTheAnswer();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        return;
+//    }
 
 
     public void getTheAnswer() throws InterruptedException {
 //        this.think();
 //        if(RandomGenerator.randomGenerator(2)==1){
-            this.answer="Answer: 90";
+        System.out.println(this.question);
 
-//            typing.start();
+        Music typingSound = new Music("src/com/company/Music/type-writing-6834.wav");
+        typingSound.start();
             for(int i=0; i<this.answer.length(); i++){
                 Thread.sleep(90);
                 System.out.print(this.answer.charAt(i));
             }
+            typingSound.stopPlaying();
+
+
             System.out.print("\n");
 //            typing.join();
             this.player.setIntelligence(this.player.intelligence+20);

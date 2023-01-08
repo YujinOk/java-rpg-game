@@ -50,12 +50,11 @@ public class GameStart extends Thread{
             public void run() {
                 int timetoWait=1;
                 try{
-
                     for(int i=1; i<2; i++){
                         timetoWait++;
-
+                        Thread.sleep(1000);
                     }
-                    Thread.sleep(1000);
+
 
                 }catch(Exception e){
                     return;
@@ -68,6 +67,7 @@ public class GameStart extends Thread{
             }
         });
         coolTime.start();
+        Music punch = new Music("src/com/company/Music/fist-punch-or-kick-7171.wav");
         while( game ){
 
             System.out.println("");
@@ -96,10 +96,8 @@ public class GameStart extends Thread{
                 game=false;
             }
             if(battleChoice==1){
-
-
                 if(!canAttack){
-                    System.out.println("You need to wait 2 sec to attack again!");
+                    System.out.println("⛔️ You need to wait 2 sec to attack again!");
                 }else{
                     player.attack();
                 }
@@ -119,10 +117,7 @@ public class GameStart extends Thread{
                 coolTime.interrupt();
                 break;
             }
-
-
         }
-
     }
 
     public void attackChoicesWithStrongerEnemy(Enemy enemy) throws InterruptedException {

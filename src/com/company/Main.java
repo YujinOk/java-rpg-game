@@ -15,6 +15,8 @@ import com.company.Train.Training;
 
 import java.util.Scanner;
 
+import static com.company.DayAndNight.night;
+import static com.company.DayAndNight.battle;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
@@ -30,7 +32,8 @@ public class Main {
 
 
         gameStart.askUserName();
-
+        DayAndNight dayAndNight= new DayAndNight();
+        dayAndNight.start();
         while (game && !player.isDead) {
             System.out.println("----------------------------------------------------------------------------------");
             System.out.println("1. Hunting");
@@ -47,6 +50,7 @@ public class Main {
 
             int menuChoices = in.nextInt();
             if (menuChoices == 1) {
+                battle=true;
                 System.out.println("1. Mountain");
                 System.out.println("2. The ocean");
 
@@ -68,6 +72,7 @@ public class Main {
 
                             gameStart.attackChoices(player.enemy);
                             gameStart.join();
+                           battle=false;
 
                     }
                     else if (mountainChoices == 2) {
@@ -81,7 +86,7 @@ public class Main {
                         player.enemy = clown;
                         System.out.println("");
                         gameStart.attackChoices(player.enemy);
-
+                        battle=false;
                     }
 
                 } else if (movingChoices == 2) {
@@ -97,12 +102,17 @@ public class Main {
                         player.enemy = ghost;
                         System.out.println("");
                         gameStart.attackChoices(player.enemy);
-
+                        battle=false;
                     }
                 }
 
             }else if (menuChoices == 2) {
-                training.trainingChoices();
+                if(night){
+                    System.out.println("You can't train at night, please go rest to recover your energy 💤");
+                }else{
+                    training.trainingChoices();
+                }
+
             } else if (menuChoices == 3) {
 //            Store class
                 store.storeChoice();
@@ -115,8 +125,13 @@ public class Main {
                 randMission.randomMissionChoices();
 
             } else if (menuChoices == 6) {
+                if(night){
+                    rest.restChoices();
+                    night=false;
+                }else{
+                    System.out.println("Please go train yourself and rest later at night!");
+                }
 
-                rest.restChoices();
 
             } else if (menuChoices == 7) {
                 if (player.upgradeTheLevel()) {
@@ -162,10 +177,6 @@ public class Main {
                         System.out.println("############################ THE END #################################################");
                         game=false;
                     }
-
-
-
-
                 }
 
             } else {

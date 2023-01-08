@@ -2,6 +2,7 @@ package com.company.Place;
 
 import com.company.Character.Player;
 import com.company.GameStart;
+import com.company.Music;
 import com.company.RandomGenerator;
 
 public class Mountain extends Place{
@@ -16,15 +17,20 @@ public class Mountain extends Place{
 
 
 
-    public void takeSnowDamage(){
+    public void takeSnowDamage() throws InterruptedException {
         if(this.hasSnow){
+            Music rain = new Music("src/com/company/Music/rain-and-thunder-113218.wav");
+
             this.difficulty+=1;
             System.out.println("Oh damn! it's too cold ❄️");
+            rain.start();
+
             System.out.println("🪫 You are losing your energy 🪫");
             player.hp--;
             System.out.println(player.name + " Hp: "+ player.hp);
             System.out.println("------------------------------------");
-
+            Thread.sleep(2000);
+            rain.stopPlaying();
         }
     }
 
