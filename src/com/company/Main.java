@@ -30,7 +30,6 @@ public class Main {
         GameStart gameStart = new GameStart(player);
         Store store = new Store(player, gameStart);
 
-
         gameStart.askUserName();
         DayAndNight dayAndNight= new DayAndNight();
         dayAndNight.start();
@@ -184,5 +183,7 @@ public class Main {
                 game = false;
             }
         }
+        dayAndNight.interrupt();
+        return;
     }
 }

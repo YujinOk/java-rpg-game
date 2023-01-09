@@ -11,11 +11,16 @@ public class DayAndNight extends Thread {
         try {
             while(true){
                 int counter=0;
-                for (int l = counter; l< 20; l++) {
-                    if (l== 19) {
-                        this.night = true;
+                int totalLoops=40;
+                for (int l = counter; l< totalLoops; l++) {
+                    if (l== totalLoops-1) {
+                        this.night = !this.night;
                       if(!battle){
-                          System.out.println("🌙 It's night. Please get some rest! 🌙");
+                       if(this.night){
+                           System.out.println("🌙 It's night. Please get some rest! 🌙");
+                       }else{
+                           System.out.println("☀️ Good day mate! get some training! ☀️");
+                       }
                       }
                     }
                     Thread.sleep(1000);

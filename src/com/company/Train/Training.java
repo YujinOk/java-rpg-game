@@ -34,7 +34,7 @@ public class Training {
         sound.stopPlaying();
 
         System.out.print("\n");
-//            typing.join();
+
        if(this.type=="intelligence"){
            this.player.setIntelligence(this.player.intelligence+20);
        }else{

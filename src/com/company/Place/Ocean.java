@@ -12,7 +12,7 @@ public class Ocean extends Place{
         super("", 1, 1, player, gameStart);
     }
 
-    public void fishingEvent(){
+    public void fishingEvent() throws InterruptedException {
         System.out.println("┌─────────────────────────────────────────────────────────────────────┐");
         System.out.println("                             Fishing Event! ");
         System.out.println("Welcome to the Fantasy Ocean! It's your lucky day!");

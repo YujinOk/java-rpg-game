@@ -17,9 +17,6 @@ public class GameStart extends Thread{
         this.player=player;
 
     }
-
-
-
     public void askUserName(){
         System.out.println("Hiya! what's your name?");
         String userName = in.nextLine();
@@ -44,22 +41,20 @@ public class GameStart extends Thread{
         boolean game=true;
         enemy.start();
 
-
         Thread coolTime= new Thread(new Runnable() {
             @Override
             public void run() {
                 int timetoWait=1;
                 try{
-                    for(int i=1; i<2; i++){
+                    for(int i=0; i<2; i++){
                         timetoWait++;
                         Thread.sleep(1000);
                     }
 
-
                 }catch(Exception e){
                     return;
                 }
-                if(timetoWait==2){
+                if(timetoWait>=2){
                     canAttack=true;
                 }else{
                     canAttack=false;
@@ -68,8 +63,7 @@ public class GameStart extends Thread{
         });
         coolTime.start();
         Music punch = new Music("src/com/company/Music/fist-punch-or-kick-7171.wav");
-        while( game ){
-
+        while( game  && !player.isDead){
             System.out.println("");
             System.out.println("1. Attack 2. Use superpower 3. Heal 4. Run away");
             System.out.println("");
@@ -92,8 +86,7 @@ public class GameStart extends Thread{
             }else if(enemy.hp>0 && this.player.hp<=0){
                 System.out.println("💀 "+ enemy.name+ " killed "+ this.player.name + " 💀");
                 this.player.isDead=true;
-                enemy.interrupt();
-                game=false;
+                break;
             }
             if(battleChoice==1){
                 if(!canAttack){
@@ -118,6 +111,7 @@ public class GameStart extends Thread{
                 break;
             }
         }
+
     }
 
     public void attackChoicesWithStrongerEnemy(Enemy enemy) throws InterruptedException {

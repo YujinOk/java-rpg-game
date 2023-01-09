@@ -29,7 +29,7 @@ public class Mountain extends Place{
             player.hp--;
             System.out.println(player.name + " Hp: "+ player.hp);
             System.out.println("------------------------------------");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             rain.stopPlaying();
         }
     }

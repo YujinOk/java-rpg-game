@@ -13,28 +13,23 @@ public class Animal {
         this.player=player;
         this.isFish=isFish;
     }
-    public void fishing(Player player){
-        System.out.println("Fishing is in progress...🎣");
-        if(this.randomGenerator(2) == 1){
+    public void fishing(Player player) throws InterruptedException {
+        Music fishSound = new Music("src/com/company/Music/footsteps-in-water-nature-sounds-8185.wav");
+        fishSound.start();
+      String text="Fishing is in progress...🎣";
+
+      for(int i=0; i<text.length(); i++){
+          System.out.print(text.charAt(i));
+      }
+        if(RandomGenerator.randomGenerator(2) == 1){
             System.out.println("Yay! I got "+ this.name);
             player.energyFromFood+=2;
             System.out.println(player.name+ " Energy: "+ player.energyFromFood);
         }else{
             System.out.println("Damn! fishing isn't going too well...😥");
         }
+        Thread.sleep(3000);
+        fishSound.stopPlaying();
     }
-    public int randomGenerator(int max) {
-        int result = 0;
-        {
-            int min = 1;
-            int range = max - min + 1;
-            // generate random numbers within 1 to 3
-            for (int i = 0; i < 3; i++) {
-                int rand = (int) (Math.random() * range) + min;
-                result = rand;
-            }
 
-        }
-        return result;
-    }
 }
