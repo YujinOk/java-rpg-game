@@ -1,8 +1,6 @@
 package com.company.Skill;
-
 import com.company.Character.Player;
 import com.company.Enemy.Enemy;
-
 public class UpperCut extends Skill{
 
     public UpperCut(){
@@ -10,7 +8,7 @@ public class UpperCut extends Skill{
     }
 
     public void useUpperCut(Enemy enemy, Player player){
-        if(super.randomGenerator(3)==1){
+        if(super.randomGenerator(5)==1){
             System.out.println("");
             System.out.println("===========================================");
             System.out.println(enemy.name + " successfully used "+ this.skillName);

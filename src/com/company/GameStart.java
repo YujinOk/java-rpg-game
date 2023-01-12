@@ -12,6 +12,7 @@ public class GameStart extends Thread{
     Player player;
     Scanner in= new Scanner(System.in);
     Level level= new Level("Ground", 0, 0, 0);
+
   static boolean canAttack=false;
     public GameStart(Player player){
         this.player=player;
@@ -44,28 +45,30 @@ public class GameStart extends Thread{
         Thread coolTime= new Thread(new Runnable() {
             @Override
             public void run() {
-                int timetoWait=1;
+                int timetoWait=0;
                 try{
-                    for(int i=0; i<2; i++){
+                    for(int i=timetoWait; i<5; i++){
                         timetoWait++;
                         Thread.sleep(1000);
                     }
-
                 }catch(Exception e){
                     return;
                 }
-                if(timetoWait>=2){
+                if(timetoWait>=4){
                     canAttack=true;
                 }else{
                     canAttack=false;
                 }
+
             }
         });
         coolTime.start();
-        Music punch = new Music("src/com/company/Music/fist-punch-or-kick-7171.wav");
-        while( game  && !player.isDead){
+
+        while( game  || !player.isDead){
             System.out.println("");
-            System.out.println("1. Attack 2. Use superpower 3. Heal 4. Run away");
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.println("   1. Attack    2. Superpower   3. Defense   4. Run away    ");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
             System.out.println("");
             int battleChoice= in.nextInt();
             if(enemy.hp<=0 &&this.player.hp>0){
@@ -89,6 +92,7 @@ public class GameStart extends Thread{
                 break;
             }
             if(battleChoice==1){
+                System.out.println(canAttack);
                 if(!canAttack){
                     System.out.println("⛔️ You need to wait 2 sec to attack again!");
                 }else{
@@ -106,11 +110,18 @@ public class GameStart extends Thread{
             }else if(battleChoice==3){
                 player.defense();
                 coolTime.interrupt();
-            }else{
-                coolTime.interrupt();
+            }else {
+                game=false;
+//                coolTime.interrupt();
+//                enemy.interrupt();
+                enemy.hasRunaway=true;
+                enemy.join();
+
                 break;
             }
         }
+      enemy.join();
+        coolTime.join();
 
     }
 

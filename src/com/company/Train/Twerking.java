@@ -10,7 +10,7 @@ public class Twerking extends Training{
        this.question=" \uD83D\uDC49  Mission: Twerking for 10 sec!  👈 ";
         this.answer="Oh damn! I got this!👊  \n\n Success! 😎";
        this.filePath="src/com/company/Music/old-school-hip-hop-drumloop-2-87bpm-128285.wav";
-        this.confirmationAnswer="Congrats! 🎉 great job! \u200D  you just earned 20 physical power";
+        this.confirmationAnswer="Congrats! 🎉 great job! you just earned 20 physical power";
     }
 
 //    public void twerking(){

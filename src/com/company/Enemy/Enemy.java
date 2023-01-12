@@ -1,5 +1,4 @@
 package com.company.Enemy;
-
 import com.company.Character.Character;
 import com.company.Character.Player;
 import com.company.Level;
@@ -8,7 +7,7 @@ import com.company.Skill.Skill;
 
 public class Enemy extends Character {
     Player player;
-
+public boolean hasRunaway=false;
     public Enemy(Level level, String name, int hp, Player player){
         super(name, hp, 0,0,0,0,level);
         this.player=player;
@@ -22,15 +21,13 @@ public class Enemy extends Character {
         System.out.println("");
     }
 
-
-
-
     @Override
     public void run() {
         game=true;
+
         while(game){
             try{
-                if(this.hp<=0 || this.player.hp<=0){
+                if(this.hp<=0 || this.player.hp<=0 || this.hasRunaway){
                     game=false;
                     break;
                 }

@@ -1,8 +1,6 @@
 package com.company.Item;
-
 import com.company.Character.Player;
 import com.company.GameStart;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +38,7 @@ public class Store {
         this.clothesList.add(new Wearable(5, "Leather jacket", 5));
         this.clothesList.add(new Wearable(5, "Bikini", 5));
     }
-    //
+
     public void showFoodListToChoose(){
         for(int i=0; i<this.foodList.size(); i++){
             System.out.println(i+1 + ". " + foodList.get(i).name+ ": $"+ foodList.get(i).price);
@@ -59,7 +57,6 @@ public class Store {
         }
     }
 
-
     public void storeChoice(){
         System.out.println("1. Buy food/ drinks");
         System.out.println("2. Buy a weapon");
@@ -70,7 +67,6 @@ public class Store {
 
         if(this.player.money<=0 && storeChoice==1||this.player.money<=0 && storeChoice==2||this.player.money<=0 &&storeChoice==3 ) {
             System.out.println("\uD83D\uDEAB  You don't have enough money to buy an item");
-
             return;
         }
         if(storeChoice==1){

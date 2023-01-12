@@ -11,8 +11,6 @@ import com.company.Random.RandomMission;
 import com.company.SuperPower.Invisible;
 import com.company.SuperPower.StealHp;
 import com.company.Train.Training;
-
-
 import java.util.Scanner;
 
 import static com.company.DayAndNight.night;
@@ -61,20 +59,24 @@ public class Main {
                     int mountainChoices = in.nextInt();
                     if (mountainChoices == 1) {
 //                    call big mountain class
+                        Skeleton skeleton = new Skeleton(level, player);
+                        player.enemy = skeleton;
                         TallMountain tallMountain = new TallMountain(10, player, gameStart);
                         tallMountain.takeSnowDamage();
                         tallMountain.climbing();
-                        Skeleton skeleton = new Skeleton(level, player);
-                        System.out.println("Right then... " + skeleton.name + " appeared all of a sudden");
-                        player.enemy = skeleton;
-                        System.out.println("");
+
+
+                      if(!player.isDead){
+                          System.out.println("Right then... " + skeleton.name + " appeared all of a sudden");
+
+                          System.out.println("");
+                      }
 
                             gameStart.attackChoices(player.enemy);
                             gameStart.join();
                            battle=false;
 
-                    }
-                    else if (mountainChoices == 2) {
+                    } else if (mountainChoices == 2) {
 //                    call small mountain class
                         SmallMountain smallMountain = new SmallMountain(player, 0, gameStart);
                         smallMountain.skateBoarding();

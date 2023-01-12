@@ -1,6 +1,7 @@
 package com.company.Random;
 
 import com.company.Character.Player;
+import com.company.Music;
 
 public class RandomTreasure {
     public String name;
@@ -35,10 +36,17 @@ public class RandomTreasure {
         System.out.println(player.name + " HP:"+ player.hp);
     }
 
-    public void increaseEnergyByFood(){
+    public void increaseEnergyByFood() throws InterruptedException {
         System.out.println("\uD83D\uDECE️ Treasure \uD83D\uDECE️");
-        System.out.println("You got "+ this.name +"!");
-        System.out.println("Eat some! \uD83D\uDE0B");
+        String yumText="You got "+ this.name + "Eat some! 😋";
+
+        Music bonusSound= new Music("src/com/company/Music/success-1-6297.wav");
+        bonusSound.start();
+        for(int i=0; i<yumText.length(); i++){
+            System.out.print(yumText.charAt(i));
+        }
+        Thread.sleep(2000);
+        bonusSound.stopPlaying();
 
         player.energyFromFood+=this.energyValue;
         System.out.println("");
