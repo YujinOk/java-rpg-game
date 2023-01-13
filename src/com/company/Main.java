@@ -11,10 +11,11 @@ import com.company.Random.RandomMission;
 import com.company.SuperPower.Invisible;
 import com.company.SuperPower.StealHp;
 import com.company.Train.Training;
+
 import java.util.Scanner;
 
-import static com.company.DayAndNight.night;
 import static com.company.DayAndNight.battle;
+import static com.company.DayAndNight.night;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
@@ -65,13 +66,11 @@ public class Main {
                         tallMountain.takeSnowDamage();
                         tallMountain.climbing();
 
-
                       if(!player.isDead){
                           System.out.println("Right then... " + skeleton.name + " appeared all of a sudden");
 
                           System.out.println("");
                       }
-
                             gameStart.attackChoices(player.enemy);
                             gameStart.join();
                            battle=false;
@@ -82,8 +81,7 @@ public class Main {
                         smallMountain.skateBoarding();
                         Clown clown = new Clown(level, player);
                         System.out.println("Right then... " + clown.name + " appeared all of a sudden");
-//                            tallMountain.enemyAppearance(skeleton);
-//                                Clown clown = new Clown(level, player);
+
                         player.enemy = clown;
                         System.out.println("");
                         gameStart.attackChoices(player.enemy);
@@ -96,11 +94,10 @@ public class Main {
                     ocean.fishingEvent();
                     if (player.hp > 0 && !player.isDead) {
                         Ghost ghost = new Ghost(level, player);
-//                        ocean.enemyAppearance(ghost);
+
                         System.out.println("Right then... " + ghost.name + " appeared all of a sudden");
-//                            tallMountain.enemyAppearance(skeleton);
-//                                Clown clown = new Clown(level, player);
                         player.enemy = ghost;
+
                         System.out.println("");
                         gameStart.attackChoices(player.enemy);
                         battle=false;
@@ -136,8 +133,8 @@ public class Main {
 
             } else if (menuChoices == 7) {
                 if (player.upgradeTheLevel()) {
-
                     Monster monster = new Monster(level, player);
+
                     Invisible invisible = new Invisible();
                     player.superPower = invisible;
                     player.enemy=monster;
@@ -158,6 +155,7 @@ public class Main {
                 } else {
                     Boss boss = new Boss(level, player);
                     player.enemy=boss;
+
                     boss.enemyInfo(boss.skill);
                     StealHp stealHp = new StealHp();
                     player.superPower = stealHp;
@@ -168,6 +166,8 @@ public class Main {
                         player.hasWon=true;
                         player.gotPrincess=true;
                         System.out.println("");
+                        Music congrats= new Music("src/com/company/Music/crowd-cheer-ii-6263.wav");
+                        congrats.start();
                         System.out.println("🎉 Congratulations!!! You can meet the princess!!!! 🎊");
 
                         Princess princess= new Princess("Cinderella", true, true);
@@ -175,6 +175,8 @@ public class Main {
                         player.princessEncounter();
                         System.out.println("When "+ princess.name+ " was about to kiss "+ player.name);
                         System.out.println(player.name+ " ran away 🤣 🤣 🤣 🤣 🤣");
+                        Thread.sleep(3000);
+                        congrats.stopPlaying();
                         System.out.println("############################ THE END #################################################");
                         game=false;
                     }

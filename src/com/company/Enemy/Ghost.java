@@ -4,10 +4,10 @@ import com.company.Level;
 import com.company.Skill.Stomp;
 
 public class Ghost extends Enemy {
- Stomp skill;
+ public Stomp skill;
     public Ghost( Level level, Player player){
-        super(level, "Ghost", 10, player);
-        this.skill= new Stomp();
+        super(level, "Ghost", 10, player, new Stomp());
+
     }
 
     public void attack(Player player){

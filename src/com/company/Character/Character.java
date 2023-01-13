@@ -3,7 +3,6 @@ package com.company.Character;
 import com.company.Enemy.Enemy;
 import com.company.Level;
 import com.company.RandomGenerator;
-import com.company.Skill.Skill;
 
 public class Character extends Thread {
     public String name;
@@ -16,7 +15,7 @@ public class Character extends Thread {
     public int money;
     public Level level;
     public boolean game=true;
-    Skill skill;
+
     public Character(String name, int hp, int exp, int attackPower, int defenseRate, int money, Level level){
         this.name=name;
         this.hp=hp;

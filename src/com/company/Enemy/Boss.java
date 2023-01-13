@@ -6,10 +6,10 @@ import com.company.Skill.Flying;
 
 public class Boss extends Enemy{
 
-    public Flying skill;
+
     public Boss( Level level, Player player){
-        super(level, "Boss", 20, player);
-        this.skill= new Flying();
+        super(level, "Boss", 10, player, new Flying());
+
     }
     public void attack(Player player){
         super.attack();
